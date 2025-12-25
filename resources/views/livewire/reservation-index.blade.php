@@ -16,10 +16,12 @@
 
             <div class="flex justify-between items-center">
                 <h2 class="text-3xl font-bold text-slate-800">
-                    @if(auth()->user()->role === 'president' || auth()->user()->role === 'admin')
+                    @if(auth()->user()->role === 'president')
                     إدارة المحجوزات الرئاسة
-                    @elseif(auth()->user()->role === 'parquet' || auth()->user()->role === 'admin')
+                    @elseif(auth()->user()->role === 'parquet')
                     إدارة المحجوزات النيابة العامة
+                    @else
+                    إدارة المحجوزات
                     @endif
                 </h2>
                 @if(auth()->user()->role === 'parquet' || auth()->user()->role === 'admin')
@@ -113,7 +115,7 @@
                                             {{ $reservation->number_file }}
                                         </td>
                                         <td class="px-12 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                            {{ $reservation->type_reserved }}
+                                            {{ $reservation->type_reserved == 'precious' ? 'محجوز ثمين' : ($reservation->type_reserved == 'currency' ? ' عمولة' : 'مخدرات') }}
                                         </td>
                                         <td class="px-12 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
                                             {{ Str::limit($reservation->description, 50) }}

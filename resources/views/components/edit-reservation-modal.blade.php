@@ -40,22 +40,32 @@
 
                 <div>
                     <label class="block text-sm">رقم الملف</label>
-                    <input name="number_file" {{ (auth()->user()->role ==='president' || auth()->user()->role ==='admin') ? 'readonly' : ''}} required value="{{$reservation->number_file}}"  class="w-full border rounded px-3 py-2">
+                    <input name="number_file" {{ (auth()->user()->role ==='president' || auth()->user()->role ==='admin') ? 'readonly' : ''}} required value="{{$reservation->number_file}}" class="w-full border rounded px-3 py-2">
                 </div>
 
                 <div>
                     <label class="block text-sm">نوع المحجوزات</label>
-                    <select name="type_reserved" {{ (auth()->user()->role ==='president' || auth()->user()->role ==='admin') ? 'readonly' : ''}} required class="w-full border rounded px-3 py-2">
-                        <option value="precious" {{$reservation->type_reserved == 'precious' ? 'selected' : ''}}>محجوز ثمين</option>
-                        <option value="currency" {{$reservation->type_reserved == 'currency' ? 'selected' : ''}}>عمولة</option>
-                        <option value="drugs" {{$reservation->type_reserved == 'drugs' ? 'selected' : ''}}>مخدرات</option>
+
+                    <select
+                        name="type_reserved"
+                        required
+                        {{ (auth()->user()->role === 'president' || auth()->user()->role === 'admin') ? 'disabled' : '' }}
+                        class="w-full border rounded px-3 py-2">
+                        <option value="precious" {{ $reservation->type_reserved == 'precious' ? 'selected' : '' }}>محجوز ثمين</option>
+                        <option value="currency" {{ $reservation->type_reserved == 'currency' ? 'selected' : '' }}>عمولة</option>
+                        <option value="drugs" {{ $reservation->type_reserved == 'drugs' ? 'selected' : '' }}>مخدرات</option>
                     </select>
+
+                    {{-- hidden input لإرسال القيمة --}}
+                    @if(auth()->user()->role === 'president')
+                    <input type="hidden" name="type_reserved" required value="{{ $reservation->type_reserved }}">
+                    @endif
                 </div>
 
                 <div>
                     <label class="block text-sm">الوصف</label>
                     <textarea name="description" {{ (auth()->user()->role ==='president' || auth()->user()->role ==='admin') ? 'readonly' : ''}} class="w-full border rounded px-3 py-2">
-                        {{$reservation->description}}
+                    {{$reservation->description}}
                     </textarea>
                 </div>
 
@@ -72,7 +82,7 @@
                 <div>
                     <label class="block text-sm">ملاحظات</label>
                     <textarea name="notes" class="w-full border rounded px-3 py-2">
-                        {{$reservation->notes}}
+                    {{$reservation->notes}}
                     </textarea>
                 </div>
                 @endif
@@ -88,7 +98,7 @@
                     </button>
                 </div>
             </form>
-             @if ($errors->any())
+            @if ($errors->any())
             <div class="mb-4 p-3 text-sm text-red-600 bg-red-100 rounded">
                 <ul>
                     @foreach ($errors->all() as $error)
