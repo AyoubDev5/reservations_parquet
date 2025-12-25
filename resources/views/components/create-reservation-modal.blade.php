@@ -46,8 +46,12 @@
                     <label class="block text-sm">نوع المحجوزات</label>
                     <select name="type_reserved" required class="w-full border rounded px-3 py-2">
                         <option value="">اختر</option>
-                        <option value="precious">محجوز ثمين</option>
-                        <option value="currency">عمولة</option>
+                        <option value="precious">ثمين</option>
+                        <option value="currencyMad">عملة محلية</option>
+                        <option value="weaponWhite">سلاح ابيض </option>
+                        <option value="بirearm">سلاح ناري</option>
+                        <option value="currencyInter">عملة صعبة</option>
+                        <option value="normal">عادي</option>
                         <option value="drugs">مخدرات</option>
                     </select>
                 </div>

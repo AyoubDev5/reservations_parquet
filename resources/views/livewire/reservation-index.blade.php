@@ -13,6 +13,15 @@
                 <span class="block sm:inline">{{ session('message') }}</span>
             </div>
             @endif
+            @if ($errors->any())
+            <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>• {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
             <div class="flex justify-between items-center">
                 <h2 class="text-3xl font-bold text-slate-800">
@@ -115,7 +124,13 @@
                                             {{ $reservation->number_file }}
                                         </td>
                                         <td class="px-12 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                            {{ $reservation->type_reserved == 'precious' ? 'محجوز ثمين' : ($reservation->type_reserved == 'currency' ? ' عمولة' : 'مخدرات') }}
+                                            {{ $reservation->type_reserved === 'precious' ? 'ثمين' : '' }}
+                                            {{ $reservation->type_reserved === 'currencyMad' ? 'عملة محلية' : '' }}
+                                            {{ $reservation->type_reserved === 'weaponWhite' ? 'سلاح ابيض' : '' }}
+                                            {{ $reservation->type_reserved === 'firearm' ? 'سلاح ناري' : '' }}
+                                            {{ $reservation->type_reserved === 'currencyInter' ? 'عملة صعبة' : '' }}
+                                            {{ $reservation->type_reserved === 'normal' ? 'عادي' : '' }}
+                                            {{ $reservation->type_reserved === 'drugs' ? 'مخدرات' : ''  }}
                                         </td>
                                         <td class="px-12 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
                                             {{ Str::limit($reservation->description, 50) }}

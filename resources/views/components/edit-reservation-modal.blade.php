@@ -52,8 +52,12 @@
                         {{ (auth()->user()->role === 'president' || auth()->user()->role === 'admin') ? 'disabled' : '' }}
                         class="w-full border rounded px-3 py-2">
                         <option value="precious" {{ $reservation->type_reserved == 'precious' ? 'selected' : '' }}>محجوز ثمين</option>
-                        <option value="currency" {{ $reservation->type_reserved == 'currency' ? 'selected' : '' }}>عمولة</option>
                         <option value="drugs" {{ $reservation->type_reserved == 'drugs' ? 'selected' : '' }}>مخدرات</option>
+                        <option value="currencyMad" {{ $reservation->type_reserved == 'currencyMad' ? 'selected' : '' }}>عملة محلية</option>
+                        <option value="weaponWhite" {{ $reservation->type_reserved == 'weaponWhite' ? 'selected' : '' }}>سلاح ابيض </option>
+                        <option value="firearm" {{ $reservation->type_reserved == 'firearm' ? 'selected' : '' }}>سلاح ناري</option>
+                        <option value="currencyInter" {{ $reservation->type_reserved == 'currencyInter' ? 'selected' : '' }}>عملة صعبة</option>
+                        <option value="normal" {{ $reservation->type_reserved == 'normal' ? 'selected' : '' }}>عادي</option>
                     </select>
 
                     {{-- hidden input لإرسال القيمة --}}
